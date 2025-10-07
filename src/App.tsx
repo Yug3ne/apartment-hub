@@ -4,6 +4,7 @@ import Landing from "@/pages/landing";
 import CaretakerLayout from "@/layouts/caretaker-layout";
 import TenantLayout from "@/layouts/tenant-layout";
 import LandlordLayout from "@/layouts/landlord-layout";
+import Dashboard from "@/pages/landlord/dashboard";
 
 function PublicRoutes({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
@@ -16,7 +17,10 @@ function ProtectedRoute({
   children: React.ReactNode;
   allowedRoles?: string[];
 }) {
-  const { user, isAuthenticated } = { user: { role: "landlord" }, isAuthenticated: true };
+  const { user, isAuthenticated } = {
+    user: { role: "landlord" },
+    isAuthenticated: true,
+  };
 
   if (!user || !isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -81,7 +85,9 @@ function AppRoutes() {
             <LandlordLayout />
           </ProtectedRoute>
         }
-      ></Route>
+      >
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route>
     </Routes>
   );
 }

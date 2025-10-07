@@ -1,7 +1,15 @@
+import { AppSidebar } from "@/components/app-sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Outlet } from "react-router";
+
 const LandlordLayout = () => {
   return (
-    <div className=''>Landlord-layout</div>
-  )
-}
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarTrigger />
+      <Outlet />
+    </SidebarProvider>
+  );
+};
 
-export default LandlordLayout
+export default LandlordLayout;
