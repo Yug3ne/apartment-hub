@@ -5,6 +5,9 @@ import CaretakerLayout from "@/layouts/caretaker-layout";
 import TenantLayout from "@/layouts/tenant-layout";
 import LandlordLayout from "@/layouts/landlord-layout";
 import Dashboard from "@/pages/landlord/dashboard";
+import Finance from "./pages/landlord/finance";
+import Lease from "./pages/landlord/lease";
+import Maintenance from "./pages/landlord/maintenance";
 
 function PublicRoutes({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
@@ -87,6 +90,9 @@ function AppRoutes() {
         }
       >
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="finance" element={<Finance />} />
+        <Route path="lease" element={<Lease />} />
+        <Route path="maintenance" element={<Maintenance />} />
       </Route>
     </Routes>
   );
