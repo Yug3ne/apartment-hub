@@ -11,7 +11,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import { ChartNoAxesCombined, CreditCard,  Users2 } from "lucide-react";
+import { ChartNoAxesCombined, CreditCard, Users2 } from "lucide-react";
 
 const barData = [
   { month: "Jan", value: 20 },
@@ -35,14 +35,26 @@ const pieData = [
 ];
 
 const statCards = [
-  { label: "Tenants", value: "325", delta: "+4%", sub: "rent" ,icon:<Users2 color="white"/>},
-  { label: "Occupancy Rate", value: "90%", delta: "+1%", sub: "last month" ,icon:<ChartNoAxesCombined color="white"/>},
+  {
+    label: "Tenants",
+    value: "325",
+    delta: "+4%",
+    sub: "rent",
+    icon: <Users2 color="white" />,
+  },
+  {
+    label: "Occupancy Rate",
+    value: "90%",
+    delta: "+1%",
+    sub: "last month",
+    icon: <ChartNoAxesCombined color="white" />,
+  },
   {
     label: "Rent Collection",
     value: "$65,350.00",
     delta: "+6.1%",
     sub: "last month",
-    icon:<CreditCard color="white"/>
+    icon: <CreditCard color="white" />,
   },
 ];
 
@@ -81,7 +93,7 @@ const Dashboard = () => {
         {statCards.map((card) => (
           <div
             key={card.label}
-            className="rounded-lg border bg-white p-4 flex items-start justify-between shadow-sm"
+            className="rounded-lg border border-gray-200 bg-white p-4 flex items-start justify-between shadow-sm"
           >
             <div className="flex flex-col">
               <span className="text-sm text-foreground">{card.label}</span>
@@ -93,7 +105,7 @@ const Dashboard = () => {
               </span>
             </div>
             <div className="size-9 rounded-md bg-primary flex items-center justify-center">
-             {card.icon}
+              {card.icon}
             </div>
           </div>
         ))}
@@ -101,9 +113,12 @@ const Dashboard = () => {
 
       {/* Charts row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-2 rounded-lg border bg-white p-4 shadow-sm flex flex-col">
+        <div className="lg:col-span-2 rounded-lg border border-gray-200 bg-white p-4 shadow-sm flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <div>
+              <span className="text-black text-sm font-bold">
+                Financial Performance
+              </span>
               <div className="text-2xl font-semibold text-gray-900">91.72%</div>
               <div className="text-xs text-gray-500">+2.4% vs last month</div>
             </div>
@@ -113,7 +128,7 @@ const Dashboard = () => {
           </div>
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={barData} barSize={20}>
+              <BarChart data={barData} barSize={50}>
                 <XAxis dataKey="month" axisLine={false} tickLine={false} />
                 <YAxis hide />
                 <RechartsTooltip cursor={{ fill: "#f3f4f6" }} />
@@ -122,7 +137,7 @@ const Dashboard = () => {
             </ResponsiveContainer>
           </div>
         </div>
-        <div className="rounded-lg border bg-white p-4 shadow-sm flex flex-col">
+        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm flex flex-col">
           <div className="font-medium text-gray-900 mb-4">Properties</div>
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -158,22 +173,22 @@ const Dashboard = () => {
       </div>
 
       {/* Maintenance table */}
-      <div className="rounded-lg border bg-white shadow-sm">
+      <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
         <div className="flex items-center justify-between p-4">
           <div className="font-medium text-gray-900">Maintenance Requests</div>
           <Button size="sm">View All →</Button>
         </div>
-        <div className="grid grid-cols-12 px-4 py-2 text-xs text-gray-500 border-t">
+        <div className="grid grid-cols-12 px-4 py-2 text-xs text-gray-500 border-t border-gray-200">
           <div className="col-span-3">Complaint</div>
           <div className="col-span-4">Property</div>
           <div className="col-span-3">Requested By</div>
-          <div className="col-span-2">Description</div>
+          <div className="col-span-2 hidden md:block">Description</div>
         </div>
-        <div className="divide-y">
+        <div className="divide-y border-t border-gray-200">
           {maintenance.map((item) => (
             <div
               key={item.id}
-              className="grid grid-cols-12 items-center px-4 py-3"
+              className="grid grid-cols-12 items-center px-4 py-3 border-t border-gray-200"
             >
               <div className="col-span-3 flex flex-col">
                 <span className="font-medium text-gray-900">{item.type}</span>
@@ -187,7 +202,7 @@ const Dashboard = () => {
                 </Avatar>
                 <span className="text-gray-700">{item.user.name}</span>
               </div>
-              <div className="col-span-2 text-gray-700 truncate">
+              <div className="col-span-2 text-gray-700 truncate hidden md:block">
                 {item.description}
               </div>
             </div>

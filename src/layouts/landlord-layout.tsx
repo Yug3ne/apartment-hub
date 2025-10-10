@@ -54,7 +54,7 @@ const LandlordLayout = () => {
             ))}
           </nav>
         </div>
-        <div className="slef-end flex  w-full items-center gap-2">
+        <div className="flex w-full items-center gap-2">
           <Button variant="outline" size="icon" className="w-2/3">
             <LogOutIcon />
             Logout
@@ -62,7 +62,7 @@ const LandlordLayout = () => {
           <ModeToggle />
         </div>
       </aside>
-      <header className=" flex flex-row justify-end items-center  gap-3 px-4 border-b bg-white">
+      <header className=" flex flex-row justify-end items-center  gap-3 px-4 border-b border-gray-200 bg-white">
         <div className="flex flex-row  items-center gap-3">
           <BellIcon color="black" />
           <div className="flex items-center gap-2">
