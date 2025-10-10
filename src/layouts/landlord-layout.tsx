@@ -34,7 +34,7 @@ const LandlordLayout = () => {
       <aside className="row-span-2 bg-Background p-4 flex flex-col justify-between">
         <div>
           <div className="font-bold text-lg mb-4">
-            <Link to="/landlord/dashboard text-foreground">Apartment Hub</Link>
+            <Link to="/landlord/dashboard" className="text-foreground">Apartment Hub</Link>
           </div>
           <nav className="space-y-2">
             {sidebarItems.map((item) => (

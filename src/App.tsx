@@ -8,6 +8,7 @@ import Dashboard from "@/pages/landlord/dashboard";
 import Finance from "./pages/landlord/finance";
 import Lease from "./pages/landlord/lease";
 import Maintenance from "./pages/landlord/maintenance";
+import NotFound from "./pages/404";
 
 function PublicRoutes({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
@@ -32,11 +33,11 @@ function ProtectedRoute({
   if (allowedRoles && !allowedRoles.includes(user.role)) {
     switch (user.role) {
       case "caretaker":
-        return <Navigate to="/caretaker/" replace />;
+        return <Navigate to="/caretaker/dashboard" replace />;
       case "landlord":
-        return <Navigate to="/landlord/" replace />;
+        return <Navigate to="/landlord/dashboard" replace />;
       case "tenant":
-        return <Navigate to="/tenant/" replace />;
+        return <Navigate to="/tenant/dashboard" replace />;
       default:
         return <Navigate to="/" replace />;
     }
@@ -66,7 +67,7 @@ function AppRoutes() {
       />
 
       <Route
-        path="/caretaker"
+        path="caretaker"
         element={
           <ProtectedRoute allowedRoles={["caretaker"]}>
             <CaretakerLayout />
@@ -74,7 +75,7 @@ function AppRoutes() {
         }
       ></Route>
       <Route
-        path="/tenant"
+        path="tenant"
         element={
           <ProtectedRoute allowedRoles={["tenant"]}>
             <TenantLayout />
@@ -82,18 +83,20 @@ function AppRoutes() {
         }
       ></Route>
       <Route
-        path="/landlord"
+        path="landlord"
         element={
           <ProtectedRoute allowedRoles={["landlord"]}>
             <LandlordLayout />
           </ProtectedRoute>
         }
       >
+        <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="finance" element={<Finance />} />
         <Route path="lease" element={<Lease />} />
         <Route path="maintenance" element={<Maintenance />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
