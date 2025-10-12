@@ -1,10 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Filter,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { Filter, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import LeaseTab from "./components/lease-tab";
 import DocumentsTab from "./components/documents-tab";
@@ -27,7 +22,7 @@ const Lease = () => {
       },
       startDate: "Jan 1, 2025",
       endDate: "Dec 31, 2025",
-      rent: "$1200",
+      rent: "KSH 120,000",
       status: {
         text: "Pending",
         type: "pending",
@@ -50,7 +45,7 @@ const Lease = () => {
       },
       startDate: "Feb 1, 2025",
       endDate: "Jan 31, 2026",
-      rent: "$1350",
+      rent: "KSH 135,000",
       status: {
         text: "Active",
         type: "active",
@@ -73,7 +68,7 @@ const Lease = () => {
       },
       startDate: "Mar 1, 2025",
       endDate: "Feb 28, 2026",
-      rent: "$1100",
+      rent: "KSH 110,000",
       status: {
         text: "Expired",
         type: "expired",
@@ -96,7 +91,7 @@ const Lease = () => {
       },
       startDate: "Apr 1, 2025",
       endDate: "Mar 31, 2026",
-      rent: "$1250",
+      rent: "KSH 125,000",
       status: {
         text: "Active",
         type: "active",
@@ -119,7 +114,7 @@ const Lease = () => {
       },
       startDate: "May 1, 2025",
       endDate: "Apr 30, 2026",
-      rent: "$1400",
+      rent: "KSH 140,000",
       status: {
         text: "Pending",
         type: "pending",
@@ -142,7 +137,7 @@ const Lease = () => {
       },
       startDate: "Jun 1, 2025",
       endDate: "May 31, 2026",
-      rent: "$1300",
+      rent: "KSH 130,000",
       status: {
         text: "Active",
         type: "active",
@@ -165,7 +160,7 @@ const Lease = () => {
       },
       startDate: "Jul 1, 2025",
       endDate: "Jun 30, 2026",
-      rent: "$1500",
+      rent: "KSH 150,000",
       status: {
         text: "Active",
         type: "active",
@@ -188,7 +183,7 @@ const Lease = () => {
       },
       startDate: "Aug 1, 2025",
       endDate: "Jul 31, 2026",
-      rent: "$1150",
+      rent: "KSH 115,000",
       status: {
         text: "Pending",
         type: "pending",
@@ -201,8 +196,6 @@ const Lease = () => {
   ];
 
   // Sample document data
- 
-
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -269,12 +262,12 @@ const Lease = () => {
             <div className="min-w-full">
               {activeTab === "lease" ? (
                 <>
-                 <LeaseTab leaseData={leaseData} />
+                  <LeaseTab leaseData={leaseData} />
                 </>
               ) : activeTab === "document" ? (
-              <>
-              <DocumentsTab />
-              </>
+                <>
+                  <DocumentsTab />
+                </>
               ) : (
                 <div className="flex items-center justify-center h-64 text-gray-500">
                   Calendar view coming soon...

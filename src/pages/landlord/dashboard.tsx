@@ -51,7 +51,7 @@ const statCards = [
   },
   {
     label: "Rent Collection",
-    value: "$65,350.00",
+    value: "KSH 6,535,000",
     delta: "+6.1%",
     sub: "last month",
     icon: <CreditCard color="white" />,
