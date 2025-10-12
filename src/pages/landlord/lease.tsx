@@ -1,14 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Filter,
   ChevronDown,
-  Star,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { useState } from "react";
+import LeaseTab from "./components/lease-tab";
+import DocumentsTab from "./components/documents-tab";
 
 const Lease = () => {
+  const [activeTab, setActiveTab] = useState("lease");
+
+  // Sample lease data
   const leaseData = [
     {
       id: 1,
@@ -196,18 +200,9 @@ const Lease = () => {
     },
   ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "pending":
-        return "text-yellow-600 bg-yellow-50";
-      case "active":
-        return "text-green-600 bg-green-50";
-      case "expired":
-        return "text-red-600 bg-red-50";
-      default:
-        return "text-gray-600 bg-gray-50";
-    }
-  };
+  // Sample document data
+ 
+
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -215,22 +210,49 @@ const Lease = () => {
       <div className="flex-1 bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col">
         {/* Tabs */}
         <div className="flex border-b border-gray-200">
-          <button className="px-6 py-3 text-sm font-medium text-gray-900 bg-gray-50 border-b-2 border-primary">
+          <button
+            onClick={() => setActiveTab("lease")}
+            className={`px-6 py-3 text-sm font-medium ${
+              activeTab === "lease"
+                ? "text-gray-900 bg-gray-50 border-b-2 border-primary"
+                : "text-gray-500 hover:text-gray-900"
+            }`}
+          >
             Lease
           </button>
-          <button className="px-6 py-3 text-sm font-medium text-gray-500 hover:text-gray-900">
+          <button
+            onClick={() => setActiveTab("document")}
+            className={`px-6 py-3 text-sm font-medium ${
+              activeTab === "document"
+                ? "text-gray-900 bg-gray-50 border-b-2 border-primary"
+                : "text-gray-500 hover:text-gray-900"
+            }`}
+          >
             Document
           </button>
-          <button className="px-6 py-3 text-sm font-medium text-gray-500 hover:text-gray-900">
+          <button
+            onClick={() => setActiveTab("calendar")}
+            className={`px-6 py-3 text-sm font-medium ${
+              activeTab === "calendar"
+                ? "text-gray-900 bg-gray-50 border-b-2 border-primary"
+                : "text-gray-500 hover:text-gray-900"
+            }`}
+          >
             Calendar
           </button>
         </div>
 
-        {/* Lease Lists Section */}
+        {/* Content Section */}
         <div className="flex-1 flex flex-col">
           {/* Section Header */}
           <div className="flex justify-between items-center p-6 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Lease Lists</h2>
+            <h2 className="text-lg font-semibold text-gray-900">
+              {activeTab === "lease"
+                ? "Lease Lists"
+                : activeTab === "document"
+                ? "Document Lists"
+                : "Calendar"}
+            </h2>
             <Button
               variant="outline"
               size="sm"
@@ -245,113 +267,40 @@ const Lease = () => {
           {/* Table */}
           <div className="flex-1 overflow-auto">
             <div className="min-w-full">
-              {/* Table Header */}
-              <div className="grid grid-cols-12 gap-4 px-6 py-3 bg-gray-50 border-b border-gray-200 text-sm font-medium text-gray-700">
-                <div className="col-span-3">Property</div>
-                <div className="col-span-3">Tenant</div>
-                <div className="col-span-1">Start Date</div>
-                <div className="col-span-1">End Date</div>
-                <div className="col-span-1">Rent</div>
-                <div className="col-span-1">Status</div>
-                <div className="col-span-2">Rent Change</div>
-              </div>
-
-              {/* Table Rows */}
-              <div className="divide-y divide-gray-200">
-                {leaseData.map((lease) => (
-                  <div
-                    key={lease.id}
-                    className="grid grid-cols-12 gap-4 px-6 py-4 hover:bg-gray-50"
-                  >
-                    {/* Property */}
-                    <div className="col-span-3 flex flex-col">
-                      <span className="font-semibold text-gray-900">
-                        {lease.property.name}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {lease.property.unit}
-                      </span>
-                    </div>
-
-                    {/* Tenant */}
-                    <div className="col-span-3 flex items-center gap-3">
-                      <Avatar className="h-8 w-8">
-                        <AvatarImage src={lease.tenant.avatar} />
-                        <AvatarFallback>
-                          {lease.tenant.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-gray-900">
-                          {lease.tenant.name}
-                        </span>
-                        <span className="text-sm text-gray-500">
-                          {lease.tenant.role}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Start Date */}
-                    <div className="col-span-1 text-gray-700">
-                      {lease.startDate}
-                    </div>
-
-                    {/* End Date */}
-                    <div className="col-span-1 text-gray-700">
-                      {lease.endDate}
-                    </div>
-
-                    {/* Rent */}
-                    <div className="col-span-1 font-semibold text-gray-900">
-                      {lease.rent}
-                    </div>
-
-                    {/* Status */}
-                    <div className="col-span-1">
-                      <span
-                        className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                          lease.status.type
-                        )}`}
-                      >
-                        <Star className="h-3 w-3" />
-                        {lease.status.text}
-                      </span>
-                    </div>
-
-                    {/* Rent Change */}
-                    <div className="col-span-2 flex flex-col">
-                      <span className="font-semibold text-gray-900">
-                        {lease.rentChange.amount}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {lease.rentChange.date}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {activeTab === "lease" ? (
+                <>
+                 <LeaseTab leaseData={leaseData} />
+                </>
+              ) : activeTab === "document" ? (
+              <>
+              <DocumentsTab />
+              </>
+              ) : (
+                <div className="flex items-center justify-center h-64 text-gray-500">
+                  Calendar view coming soon...
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Pagination */}
-          <div className="flex justify-between items-center px-6 py-4 border-t border-gray-200">
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-700">25 per page</span>
-              <ChevronDown className="h-4 w-4 text-gray-500" />
+          {/* Pagination - Only show for lease and document tabs */}
+          {activeTab !== "calendar" && (
+            <div className="flex justify-between items-center px-6 py-4 border-t border-gray-200">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-700">25 per page</span>
+                <ChevronDown className="h-4 w-4 text-gray-500" />
+              </div>
+              <div className="text-sm text-gray-700">1-25 of 654</div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm">
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="sm">
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
-            <div className="text-sm text-gray-700">1-25 of 654</div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="sm">
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
