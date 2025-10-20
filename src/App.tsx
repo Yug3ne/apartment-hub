@@ -3,6 +3,10 @@ import Login from "@/pages/login";
 import Landing from "@/pages/landing";
 import CaretakerLayout from "@/layouts/caretaker-layout";
 import TenantLayout from "@/layouts/tenant-layout";
+import TenantDashboard from "@/pages/tenant/dashboard";
+import TenantPayments from "@/pages/tenant/payments";
+import TenantLease from "@/pages/tenant/lease";
+import TenantMaintenance from "@/pages/tenant/maintenance";
 import LandlordLayout from "@/layouts/landlord-layout";
 import Dashboard from "@/pages/landlord/dashboard";
 import Finance from "./pages/landlord/finance";
@@ -22,7 +26,7 @@ function ProtectedRoute({
   allowedRoles?: string[];
 }) {
   const { user, isAuthenticated } = {
-    user: { role: "landlord" },
+    user: { role: "tenant" },
     isAuthenticated: true,
   };
 
@@ -81,7 +85,13 @@ function AppRoutes() {
             <TenantLayout />
           </ProtectedRoute>
         }
-      ></Route>
+      >
+        <Route index element={<Navigate to="dashboard" replace />} />
+        <Route path="dashboard" element={<TenantDashboard />} />
+        <Route path="payments" element={<TenantPayments />} />
+        <Route path="lease" element={<TenantLease />} />
+        <Route path="maintenance" element={<TenantMaintenance />} />
+      </Route>
       <Route
         path="landlord"
         element={
